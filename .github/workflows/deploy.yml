@@ -28,18 +28,9 @@ jobs:
         username: ${{ secrets.EC2_USER }}
         key: ${{ secrets.EC2_SSH_KEY }}
         script: |
-          if ! command -v go &> /dev/null
-          then
-            echo "Go no está instalado. Instalando Go..."
-            sudo apt-get update
-            sudo apt-get install -y wget tar git
-            wget https://golang.org/dl/go1.23.3.linux-amd64.tar.gz
-            sudo tar -C /usr/local -xvzf go1.23.3.linux-amd64.tar.gz
-            echo "export PATH=\$PATH:/usr/local/go/bin" >> ~/.bashrc
-            source ~/.bashrc
-          fi
-          pkill -f main.go || echo "No existing process found"
+          pm2 delete appgo || echo "No existing process found"
           cd PracticeEC2_OF_GO
           git pull origin main
-          nohup go run main.go > output.log 2>&1 &
+          pm2 start go --name "appgo" -- run main.go
+          pm2 save
           echo "Application is running in the background."
