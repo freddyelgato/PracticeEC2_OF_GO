@@ -34,3 +34,4 @@ jobs:
           pm2 start go --name "appgoo" -- run main.go
           pm2 save
           echo "Application is running in the background."
+
