@@ -48,7 +48,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	port := os.Getenv("PORT") // Agregado para obtener el puerto desde una variable de entorno
 	if port == "" {
-		port = "8080"                                     // Establece un puerto predeterminado si no está configurado
+		port = "80"                                       // Establece un puerto predeterminado si no está configurado
 		log.Println("Usando puerto predeterminado: 8080") // Agregado para mostrar el puerto utilizado
 	}
 
