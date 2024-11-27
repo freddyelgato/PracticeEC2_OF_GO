@@ -28,10 +28,10 @@ jobs:
         username: ${{ secrets.EC2_USER }}
         key: ${{ secrets.EC2_SSH_KEY }}
         script: |
-          pm2 delete appgoo || echo "No existing process found"
+          sudo pm2 delete appgoo || echo "No existing process found"
           cd PracticeEC2_OF_GO
           git pull origin main
-          pm2 start go --name "appgoo" -- run main.go
-          pm2 save
+          sudo pm2 start go --name "appgoo" -- run main.go
+          sudo pm2 save
           echo "Application is running in the background."
 
